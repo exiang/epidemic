@@ -1,0 +1,6 @@
+[submodule "input/moh"]
+	path = input/moh
+	url = https://github.com/MoH-Malaysia/covid19-public.git
+[submodule "input/citf"]
+	path = input/citf
+	url = https://github.com/CITF-Malaysia/citf-public.git
