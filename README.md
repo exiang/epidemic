@@ -6,6 +6,14 @@ This script run from command line on machine installed with > PHP7.2 and has GD 
 
 Feel free to contribute.
 
+## Running it:
+```php generate.php 2020-12-31```
+
+This command will execute to generate image reporting at `/output/yyyy-mm-dd/latest_status.jpg`
+Make sure the related directory is writable.
+
+For now, we only support the latest status summary reporting.
+
 ## Notes:
 - Figures on this EDM is not 100% in sync with https://covidnow.moh.gov.my/
 - The following discrepancy is observed as on 2021-09-08: 
