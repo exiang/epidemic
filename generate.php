@@ -36,8 +36,7 @@ function generateLatestStatus($date)
     $accumulatedCase = $accumulatedRecoverCase = 0;
     $newCase = $newRecoverCase = 0;
     foreach ($csvCasesMalaysia as $row) {
-        if(str_replace('-', '', $row['date']) <= str_replace('-', '', $date))
-        {
+        if (str_replace('-', '', $row['date']) <= str_replace('-', '', $date)) {
             $accumulatedCase += $row['cases_new'];
             $accumulatedRecoverCase += $row['cases_recovered'];
         }
@@ -53,8 +52,7 @@ function generateLatestStatus($date)
     $csvDeathsMalaysia = loadCsvDeathsMalaysia();
     $accumulatedDeathCase = $newDeathCase = 0;
     foreach ($csvDeathsMalaysia as $row) {
-        if(str_replace('-', '', $row['date']) <= str_replace('-', '', $date))
-        {
+        if (str_replace('-', '', $row['date']) <= str_replace('-', '', $date)) {
             $accumulatedDeathCase += $row['deaths_new'];
         }
         
@@ -66,8 +64,7 @@ function generateLatestStatus($date)
     $csvIcu = loadCsvIcu();
     $icuCase = 0;
     $ventCase = 0;
-    foreach($csvIcu as $row)
-    {
+    foreach ($csvIcu as $row) {
         if ($row['date'] == $date) {
             $icuCase += $row['icu_covid'] + $row['icu_pui'];
             $ventCase += $row['vent_covid'] + $row['vent_pui'];
@@ -76,8 +73,7 @@ function generateLatestStatus($date)
 
     $csvPkrc = loadCsvPkrc();
     $pkrcCase = 0;
-    foreach($csvPkrc as $row)
-    {
+    foreach ($csvPkrc as $row) {
         if ($row['date'] == $date) {
             $pkrcCase += $row['pkrc_covid'] + $row['pkrc_pui'];
         }
@@ -85,16 +81,36 @@ function generateLatestStatus($date)
 
     $csvHospital = loadCsvHospital();
     $hospitalCase = 0;
-    foreach($csvHospital as $row)
-    {
+    foreach ($csvHospital as $row) {
         if ($row['date'] == $date) {
             $hospitalCase += $row['hosp_covid'] + $row['hosp_pui'];
         }
     }
-    // todo: stuck here, cant find the home quarantine data
-    $activeCase = $hospitalCase + $pkrcCase + $icuCase;
-    //$activeCase = 248673;
 
+    $csvPopulation = loadCsvPopulation();
+    $malaysiaPopulation = 0;
+    foreach ($csvPopulation as $row) {
+        if ($row['state'] == 'Malaysia') {
+            $malaysiaPopulationArray = $row;
+        }
+    }
+
+    // calc activeCase
+    $activeCase = $accumulatedCase - $accumulatedRecoverCase - $accumulatedDeathCase;
+    
+    // vaccination
+    $dateVax = sprintf('%s/%s/%s', $dateDay, $dateMonth, $dateYear);
+    $csvVax = loadCsvVaccination();
+    $accumulatedVax = $accumulatedPartialVax = $accumulatedFullVax = 0;
+    foreach ($csvVax as $row) {
+        if ($row['date'] <= $date) {
+            $accumulatedVax = $row['cumul'];
+            list($dateYearVax, $dateMonthVax, $dateDayVax) = explode('-', $row['date']);
+            $dateVax = sprintf('%s/%s/%s', $dateDayVax, $dateMonthVax, $dateYearVax);
+            $accumulatedPartialVax = $row['cumul_partial'];
+            $accumulatedFullVax = $row['cumul_full'];
+        }
+    }
     //
     // write date
     writeLeft($im, sprintf('%s.%s.%s', ltrim($dateDay, '0'), ltrim($dateMonth, '0'), $dateYear), 20, 58, 110, $colorBlack, $fontLatoBlack);
@@ -119,10 +135,9 @@ function generateLatestStatus($date)
     // write accumulated recover case
     writeCenter($im, number_format($accumulatedRecoverCase), 35, 565, 465, 455, 50, $colorWhite, $fontLatoBold);
 
-
     //
-    // todo: write active case
-    // writeCenter($im, number_format($activeCase), 53, 55, 599, 460, 90, imagecolorallocate($im, 51, 27, 89), $fontLatoBold);
+    // write active case
+    writeCenter($im, number_format($activeCase), 53, 55, 599, 460, 90, imagecolorallocate($im, 51, 27, 89), $fontLatoBold);
 
     // write icu case
     writeCenter($im, number_format($icuCase), 35, 73, 734, 175, 50, $colorWhite, $fontLatoBold);
@@ -134,6 +149,21 @@ function generateLatestStatus($date)
     writeCenter($im, number_format($newDeathCase), 53, 567, 590, 460, 90, imagecolorallocate($im, 60, 34, 20), $fontLatoBold);
     // write accumulated death case
     writeCenter($im, number_format($accumulatedDeathCase), 35, 565, 740, 455, 50, $colorWhite, $fontLatoBold);
+
+    // vaccination
+    writeCenter($im, sprintf('(Sehingga %s)', $dateVax), 16, 800, 855, 210, 24, $colorWhite, $fontLatoBold);
+    writeCenter($im, number_format($accumulatedVax), 35, 672, 982, 368, 40, $colorWhite, $fontLatoBold);
+
+    // write partial vax percentage
+    writeCenter($im, sprintf('%.1f %%', ($accumulatedPartialVax/$malaysiaPopulationArray['pop'] * 100)), 15, 382, 915, 63, 43, $colorWhite, $fontLatoBold);
+    // write partial vax number
+    writeCenter($im, sprintf('%s juta', number_format($accumulatedPartialVax/1000000, 1, '.', '')), 30, 465, 918, 160, 43, $colorWhite, $fontLatoBold);
+    ;
+    // write full vax percentage
+    writeCenter($im, sprintf('%.1f %%', ($accumulatedFullVax/$malaysiaPopulationArray['pop'] * 100)), 15, 382, 975, 63, 43, $colorWhite, $fontLatoBold);
+    ;
+    // write full vax number
+    writeCenter($im, sprintf('%s juta', number_format($accumulatedFullVax/1000000, 1, '.', '')), 30, 465, 978, 160, 43, $colorWhite, $fontLatoBold);
 
     // Output the image
     header('Content-Type: image/jpeg');
@@ -210,6 +240,31 @@ function loadCsvPkrc()
 function loadCsvHospital()
 {
     $file = sprintf('%s/input/moh/epidemic/hospital.csv', getcwd());
+    $rows   = array_map('str_getcsv', file($file));
+    $header = array_shift($rows);
+    $csv    = array();
+    foreach ($rows as $row) {
+        $csv[] = array_combine($header, $row);
+    }
+
+    return $csv;
+}
+
+function loadCsvVaccination()
+{
+    $file = sprintf('%s/input/citf/vaccination/vax_malaysia.csv', getcwd());
+    $rows   = array_map('str_getcsv', file($file));
+    $header = array_shift($rows);
+    $csv    = array();
+    foreach ($rows as $row) {
+        $csv[] = array_combine($header, $row);
+    }
+
+    return $csv;
+}
+function loadCsvPopulation()
+{
+    $file = sprintf('%s/input/moh/static/population.csv', getcwd());
     $rows   = array_map('str_getcsv', file($file));
     $header = array_shift($rows);
     $csv    = array();
