@@ -155,12 +155,12 @@ function generateLatestStatus($date)
     writeCenter($im, number_format($accumulatedVax), 35, 672, 982, 368, 40, $colorWhite, $fontLatoBold);
 
     // write partial vax percentage
-    writeCenter($im, sprintf('%.1f %%', ($accumulatedPartialVax/$malaysiaPopulationArray['pop'] * 100)), 15, 382, 915, 63, 43, $colorWhite, $fontLatoBold);
+    writeCenter($im, sprintf('%s %%', number_format((float)round($accumulatedPartialVax/$malaysiaPopulationArray['pop'] * 100, 2, PHP_ROUND_HALF_UP), 1, '.', ',')), 15, 382, 915, 63, 43, $colorWhite, $fontLatoBold);
     // write partial vax number
     writeCenter($im, sprintf('%s juta', number_format($accumulatedPartialVax/1000000, 1, '.', '')), 30, 465, 918, 160, 43, $colorWhite, $fontLatoBold);
     ;
     // write full vax percentage
-    writeCenter($im, sprintf('%.1f %%', ($accumulatedFullVax/$malaysiaPopulationArray['pop'] * 100)), 15, 382, 975, 63, 43, $colorWhite, $fontLatoBold);
+    writeCenter($im, sprintf('%s %%', number_format((float)round($accumulatedFullVax/$malaysiaPopulationArray['pop'] * 100, 2, PHP_ROUND_HALF_UP), 1, '.', ',')), 15, 382, 975, 63, 43, $colorWhite, $fontLatoBold);
     ;
     // write full vax number
     writeCenter($im, sprintf('%s juta', number_format($accumulatedFullVax/1000000, 1, '.', '')), 30, 465, 978, 160, 43, $colorWhite, $fontLatoBold);
