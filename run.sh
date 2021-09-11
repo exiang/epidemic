@@ -10,6 +10,7 @@ git pull
 cd ..
 echo $(gdate +%F)
 echo $(gdate -d "yesterday" +%F)
+echo $(gdate -d "2 days before" +%F)
 php generate.php $(gdate +%F)
 php generate.php $(gdate -d "yesterday" +%F)
 git add output
