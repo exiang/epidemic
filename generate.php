@@ -15,7 +15,6 @@ function generateLatestStatus($date)
 {
     $templateFile = getcwd().'/template/latest_status.jpg';
     $outputPath = sprintf('%s/output/%s', getcwd(), $date);
-    mkdir($outputPath, 0777, true);
     $outputFile = sprintf('%s/latest_status.jpg', $outputPath);
     $width = $height = 1080;
 
@@ -111,6 +110,14 @@ function generateLatestStatus($date)
             $accumulatedFullVax = $row['cumul_full'];
         }
     }
+
+    // check to proceed to generate or not
+    if (empty($newCase) && empty($newDeathCase) && empty($newRecoverCase) && empty($activeCase)) {
+        echo "\nNot enough data to generate!\n";
+        return;
+    }
+
+
     //
     // write date
     writeLeft($im, sprintf('%s.%s.%s', ltrim($dateDay, '0'), ltrim($dateMonth, '0'), $dateYear), 20, 58, 110, $colorBlack, $fontLatoBlack);
@@ -166,6 +173,7 @@ function generateLatestStatus($date)
     writeCenter($im, sprintf('%s juta', number_format($accumulatedFullVax/1000000, 1, '.', '')), 30, 465, 978, 160, 43, $colorWhite, $fontLatoBold);
 
     // Output the image
+    mkdir($outputPath, 0777, true);
     header('Content-Type: image/jpeg');
     imagejpeg($im, $outputFile);
     imagedestroy($im);
