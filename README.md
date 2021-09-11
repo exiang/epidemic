@@ -13,11 +13,11 @@ Make sure the related directory is writable.
 For now, it only support the `latest status` summary reporting.
 
 ## Notes:
-- Figures on this EDM is not 100% in sync with https://covidnow.moh.gov.my/
+- Figures on this reporting may not 100% in sync with https://covidnow.moh.gov.my/
 - The following discrepancy is observed as on 2021-09-08: 
-  - icu cases in website: 1282 (icu_covid+icu_pui) while EDM: 904
-  - vent cases in website: 744 (vent_covid+vent_pui) while EDM: 430
-- I have decided to follow website as the calculation is known and clear
+  - icu cases in website: 1282 (icu_covid+icu_pui) while mine: 904
+  - vent cases in website: 744 (vent_covid+vent_pui) while mine: 430
+- Discrepancy feedback been submitted to covidnow team thru twitter
 
 ## Contributes:
 Feel free to contribute to this open source project
