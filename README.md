@@ -15,6 +15,12 @@ For now, it only support the `latest status` summary reporting.
 ## Setup
 - GIt submodule is use here to get data from MOH and CITF. First time running pls do: `git submodule update --init --recursive`
 - on ubuntu server you may need to symlink gdate `sudo ln -s $(which date) /bin/gdate` for the sh to function correctly
+- execute run.sh will required git credential. prevent it asking everytime
+```
+git config --global credential.helper cache
+./run.sh
+```
+Then, it will ask for credential, insert once to register and it will never ask again. You can unset it using `git config --global --unset user.password`
 
 ## Notes:
 - Figures on this reporting may not 100% in sync with https://covidnow.moh.gov.my/
