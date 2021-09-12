@@ -1,11 +1,12 @@
 # for mac, please install `brew install coreutils` first
 
+git pull origin main
 cd input/moh
-git checkout master
+git checkout main
 git pull
 cd ..
 cd input/citf
-git checkout master
+git checkout main
 git pull
 cd ..
 echo $(gdate +%F)
