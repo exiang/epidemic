@@ -13,7 +13,8 @@ Make sure the related directory is writable.
 For now, it only support the `latest status` summary reporting.
 
 ## Setup
-GIt submodule is use here to get data from MOH and CITF. First time running pls do: `git submodule update --init --recursive`
+- GIt submodule is use here to get data from MOH and CITF. First time running pls do: `git submodule update --init --recursive`
+- on ubuntu server you may need to symlink gdate `sudo ln -s $(which date) /bin/gdate` for the sh to function correctly
 
 ## Notes:
 - Figures on this reporting may not 100% in sync with https://covidnow.moh.gov.my/
