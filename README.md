@@ -12,6 +12,9 @@ Make sure the related directory is writable.
 
 For now, it only support the `latest status` summary reporting.
 
+## Setup
+GIt submodule is use here to get data from MOH and CITF. First time running pls do: `git submodule update --init --recursive`
+
 ## Notes:
 - Figures on this reporting may not 100% in sync with https://covidnow.moh.gov.my/
 - The following discrepancy is observed as on 2021-09-08: 
