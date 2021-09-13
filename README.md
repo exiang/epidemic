@@ -28,7 +28,7 @@ This format was use by MOH from ? until 8 SEP 2021.
 
 <img src="https://github.com/exiang/epidemic/blob/main/original/latest_status.jpg?raw=true" alt="Sample" width="200"/>
 
-### Latest Summary version 1 (latest_summary.v1, in progress)
+### Latest Summary version 1 (latest_summary.v1) [in progress]
 This format is use by MOH from 9 SEP 2021 until ? align with the launching of covidnow.moh.gov.my
 
 <img src="https://github.com/exiang/epidemic/blob/main/original/latest_status.v1.jpg?raw=true" alt="Sample" width="200"/>
