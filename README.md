@@ -27,11 +27,13 @@ If needed, you can unset it using `git config --global --unset user.password`
 This format was use by MOH from ? until 8 SEP 2021.
 
 <img src="https://github.com/exiang/epidemic/blob/main/original/latest_status.jpg?raw=true" alt="Sample" width="200"/>
+<img src="https://github.com/exiang/epidemic/blob/main/template/latest_status.jpg?raw=true" alt="Sample" width="200"/>
 
 ### latest_summary.v1 [in progress]
 This format is use by MOH from 9 SEP 2021 until ? align with the launching of covidnow.moh.gov.my
 
 <img src="https://github.com/exiang/epidemic/blob/main/original/latest_status.v1.jpg?raw=true" alt="Sample" width="200"/>
+<img src="https://github.com/exiang/epidemic/blob/main/template/latest_status.v1.jpg?raw=true" alt="Sample" width="200"/>
 
 ## Notes:
 - Figures on this reporting may not 100% in sync with https://covidnow.moh.gov.my/
