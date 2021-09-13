@@ -12,7 +12,7 @@ Make sure the related directory is writable.
 
 For now, it only support the `latest status` summary reporting.
 
-## Setup
+## Setup:
 GIt submodule is use here to get data from MOH and CITF. First time running pls do: `git submodule update --init --recursive`
 
 on ubuntu server you may need to symlink gdate `sudo ln -s $(which date) /bin/gdate` for the sh to function correctly
@@ -20,6 +20,18 @@ on ubuntu server you may need to symlink gdate `sudo ln -s $(which date) /bin/gd
 execute run.sh will required git credential. To prevent it asking everytime, run `git config --global credential.helper cache`.
 Then, run `./run.sh` and you will be prompt for credential, insert once to register and it will never ask again. 
 If needed, you can unset it using `git config --global --unset user.password`
+
+## Supported Output Format:
+
+### Latest Summary (latest_summary)
+This format was use by MOH from ? until 8 SEP 2021.
+
+<img src="https://github.com/exiang/epidemic/blob/main/original/latest_status.jpg?raw=true" alt="Sample" width="200"/>
+
+### Latest Summary version 1 (latest_summary.v1, in progress)
+This format is use by MOH from 9 SEP 2021 until ? align with the launching of covidnow.moh.gov.my
+
+<img src="https://github.com/exiang/epidemic/blob/main/original/latest_status.v1.jpg?raw=true" alt="Sample" width="200"/>
 
 ## Notes:
 - Figures on this reporting may not 100% in sync with https://covidnow.moh.gov.my/
