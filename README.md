@@ -2,8 +2,6 @@
 
 I developed this for my wife who used to the old reporting format. This PHP generator will grab the open data from MOH and CITF github to dynamically generate in the old graphical reporting format that MOH released everyday prior to September 2021. 
 
-This script run from command line on machine installed with > PHP7.2 and has GD enabled. Developed on Mac but havent tested on other OS yet.
-
 ## Running it:
 ```php generate.php 2020-12-31```
 
@@ -13,6 +11,8 @@ Make sure the related directory is writable.
 For now, it only support the `latest status` summary reporting.
 
 ## Setup:
+This script run from command line on machine installed with > PHP7.2 and has GD enabled. Developed on Mac, cron run on ubuntu server.
+
 GIt submodule is use here to get data from MOH and CITF. First time running pls do: `git submodule update --init --recursive`
 
 on ubuntu server you may need to symlink gdate `sudo ln -s $(which date) /bin/gdate` for the sh to function correctly
