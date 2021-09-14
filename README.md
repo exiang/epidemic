@@ -2,7 +2,7 @@
 
 I developed this for my wife who used to the old reporting format. This PHP generator will grab the open data from MOH and CITF github to dynamically generate in the old graphical reporting format that MOH released everyday prior to SEP 2021. 
 
-Then, new reporting formated (covidnow look & feel) is supported too.
+Then, new reporting format (covidnow look & feel) is supported too.
 
 ## Running it:
 ```php generate.php 2020-12-31```
