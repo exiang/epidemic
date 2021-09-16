@@ -4,6 +4,8 @@ I developed this for my wife who used to the old reporting format. This PHP gene
 
 Then, new reporting format (covidnow look & feel) is supported too.
 
+You can [view all generated reports here](https://github.com/exiang/epidemic/tree/main/output)
+
 ## Running it:
 ```php generate.php 2020-12-31```
 
