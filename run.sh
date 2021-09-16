@@ -4,11 +4,11 @@ git pull origin main
 cd input/moh
 git checkout main
 git pull
-cd ..
+cd ../..
 cd input/citf
 git checkout main
 git pull
-cd ..
+cd ../..
 echo $(gdate +%F)
 echo $(gdate -d "yesterday" +%F)
 echo $(gdate -d "-2 days" +%F)
