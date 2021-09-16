@@ -34,6 +34,10 @@ This report will be generated if your entry date is on and after 1st SEP 2021
 
 <img src="https://github.com/exiang/epidemic/blob/main/original/latest_status.v1.jpg?raw=true" alt="Sample" width="200" />&nbsp;<img src="https://github.com/exiang/epidemic/blob/main/template/latest_status.v1.jpg?raw=true" alt="Sample" width="200" />
 
+### latest_summary.v2
+This format is use by MOH starting from 16th SEP 2021.
+This report will be generated if your entry date is on and after 16th SEP 2021
+
 ## Notes:
 - Figures on this reporting may not 100% in sync with https://covidnow.moh.gov.my/
 - The following discrepancy is observed as on 2021-09-08: 
